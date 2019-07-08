@@ -1,0 +1,171 @@
+function func()
+{
+  var str1=document.getElementById("nameoneId").value.toLowerCase();
+  var str2=document.getElementById("nametwoId").value.toLowerCase();
+  var loverName=str1.split('');
+  var crushName=str2.split('');
+  console.log(loverName);
+  console.log(crushName);
+  var lovernumber=FindNumberForName(loverName);
+  var crushnumber=FindNumberForName(crushName);
+  
+  if((lovernumber%2===0 && crushnumber%2===0)||(lovernumber%2!==0 && crushnumber%2!==0))
+  {
+    console.log("Perfect Match :)!!");
+  }
+  else{
+    console.log("Try for better match :(");
+  }
+}
+
+// Functin to find numeric number of name entered
+function FindNumberForName(name)
+{
+  var last_name=[];
+  var first_name=[];
+  var finalTotal=0;
+  if(name.includes(" "))
+  {
+  var indx=name.indexOf(" ");
+  last_name=name.splice(indx+1); 
+  first_name=name.splice(0,indx); 
+  
+  var sum2=letterValue(last_name);
+  var total2=fntotal(sum2);
+  total2=InitialTotal(total2);
+  
+  var sum1=letterValue(first_name);
+  var total1=fntotal(sum1);
+  total1=InitialTotal(total1);
+  
+  finalTotal=FinalTotal1(total1,total2);
+   }
+  else{
+    first_name=name;
+  var sum=letterValue(first_name);
+   var total=fntotal(sum);
+  total=InitialTotal(total);
+   
+  }
+return finalTotal;
+}
+
+//Final numeric value with firstname and lastname
+function FinalTotal1(total1,total2){
+  if((total1+total2)!==0 || (total1+total2)!==undefined){
+ while((total1+total2)>9)
+  {
+   return ((total1+total2)>9)?ValueMoreThanTen(total1+total2):total1+total2;
+  }
+  }
+  else{
+    return  (total1>9)?ValueMoreThanTen(total1):total1;
+  }
+}
+
+//reducing till it becomes less than 9
+function InitialTotal(total){
+  if(total!==0 || total!==undefined){
+ while(total>9)
+  {
+   return (total>9)?ValueMoreThanTen(total):total;
+  }
+  }
+  else{
+    return 0;
+  }
+}
+
+//Getting sum of digit of number array
+function ValueMoreThanTen(value)
+{ var sum=0;
+if(value!==0 || value!==undefined){
+  while(value>0){
+  sum+=value%10;
+  value=Math.floor(value/10);
+  }
+  return sum;
+}
+else{
+  return 0;
+}
+}
+
+function fntotal(value){
+  var sum=0;
+  if(value!==0 || value!==undefined){
+  for(var i=0;i<value.length;i++)
+  {
+    sum=sum+value[i];
+  }
+  return sum;
+  }
+  else{
+    return 0;
+  }
+}
+
+
+// numeric value assigned for each alphabets in the name array
+function letterValue(name)
+{
+  var number=[];
+  if(name===undefined || name===[]){
+    return 0;
+  }
+  else{
+  for(var i=0;i<name.length;i++)
+  {
+    switch(name[i])
+    {
+      case 'a':      case 'j':      case 's':
+            number[i]=1;
+            break;
+      case 'b':
+      case 'k':
+      case 't':
+            number[i]=2;
+            break;
+      case 'c':
+      case 'l':
+      case 'u':
+            number[i]=3;
+            break;
+      case 'd':
+      case 'm':
+      case 'v':
+            number[i]=4;
+      break;
+      case 'e':
+      case 'n':
+      case 'w':
+            number[i]=5;
+            break;
+      case 'f':
+      case 'o':
+      case 'x':
+            number[i]=6;
+            break;
+      case 'g':
+      case 'p':
+      case 'y':
+            number[i]=7;
+            break;
+      case 'h':
+      case 'q':
+      case 'z':
+            number[i]=8;
+            break;
+      case 'i':
+      case 'r':
+            number[i]=9;
+            break;
+      default:
+            break;
+    }
+  }
+  return number;
+  }
+  
+}
+
